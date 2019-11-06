@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Trains</title>
+   
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="./style.css">
+
+
+</head>
+  <body>
+
+    <div class="makah">
+            <div class="container">
+                
+                     <h1 class="display-3">Anytime is Train Time</h1>
+                    <p>choo choo. chee chee.</p>
+                
+                
+        </div>
+    </div>
+
+
+
+    <div class="row">
+            <div class="col-md-12">
+                <label><h2>Current Trains schedule</h2></label>
+                    <table class="table table-hover">
+                    <thead>
+                        <tr>
+                        <th scope="col">Train Name</th>
+                        <th scope="col">Destination</th>
+                        <th scope="col">Frequency(min)</th>
+                        <th scope="col">Next arrival</th>
+                        <th scope="col">Minutes Away</th>
+                        
+                        </tr>
+                    </thead>
+                 
+                    <tbody id="train">
+                        <tr>
+                        <td scope="row">Trenton Express</td>
+                        <td>Trention</td>
+                        <td>25</td>
+                        <td>05:35PM</td>
+                        <td>10</td>
+                        </tr>
+                        
+                    </tbody>
+                    </table>
+            </div>
+        
+        </div>                                                       
+    </div>
+    <div class="container">
+
+        <div class="row">
+        <form class="col-md-12" id="form">
+            <label><h2>Add Train</h2></label>
+                <div class="form-group">
+                    <label for="train">Train Name:</label>
+                    <input type="text" class="form-control" id="name-input" placeholder="">
+                </div>
+                <div class="form-group">
+                    <label for="Destination">Destination:</label>
+                    <input type="text" class="form-control" id="role-input" placeholder="">
+                </div>
+                <div class="form-group">
+                    <label for="time">First Train Time ( HH:mm - military time)</label>
+                    <input type="text" class="form-control" id="date-input" placeholder="">
+                </div>
+                <div class="form-group">
+                    <label for="Frequency">Frequency (min):</label>
+                    <input type="text" class="form-control" id="rate-input" placeholder="">
+                </div>
+                <button class="btn btn-primary" id='submit-train'>Submit</button>                
+        </form>
+        </div>
+      
+        
+
+<script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+
+
+<script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-database.js"></script>
+
+<script>
+  //used same firebase as i did for my employee app.
+
+  var firebaseConfig = {
+    apiKey: "AIzaSyBJxe_2sK4KDeY_bK93I8quTCKWK8jVlDE",
+    authDomain: "employee-timesheet-3d7a4.firebaseapp.com",
+    databaseURL: "https://employee-timesheet-3d7a4.firebaseio.com",
+    projectId: "employee-timesheet-3d7a4",
+    storageBucket: "employee-timesheet-3d7a4.appspot.com",
+    messagingSenderId: "966539071219",
+    appId: "1:966539071219:web:f5d16bfbdf3237d0dab186",
+    measurementId: "G-TLC5DR06ZL"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+
+  const database = firebase.database();
+
+
+$("#submit-tain").on("click", function(event){
+
+  console.log("Submit button clicked");
+
+        event.preventDefault();
+
+        const name = $("#train-input").val().trim();
+        const role = $("#destination-input").val().trim();
+        const date = $("#frequency-input").val().trim();
+        const  rate =$("#next-input").val().trim();
+        const  rate =$("#minutes-input").val().trim();
+
+
+database.ref().push(
+{
+train, 
+destination,
+frequency,
+next,
+minutes,
+dateAdded:firebase.database.serverValue.TIMESTAMP
+});
+$('input').each(function() {
+        $(this).val('');
+      });
+
+      $('textarea').val('');
+
+    });
+database.ref().on("child_added", function(snapshot) {
+
+        console.log(train);
+        console.log(destination);
+        console.log(frequency);
+        console.log(next);
+        console.log(minutes);
+        database.ref().set({
+          train
+          
+        });
+        database.ref().set({
+          destination
+          
+        });
+        database.ref().set({
+          frequency
+          
+        });
+        database.ref().set({
+          next
+        
+        });
+        database.ref().set({
+          minutes
+          
+        });
+      });
+
+</script>
+
+    
+    
+      
+    
+  
+    </body>
+</html>
+  
