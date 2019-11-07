@@ -109,8 +109,6 @@
   firebase.analytics();
 
   const database = firebase.database();
-
-
 $("#submit-tain").on("click", function(event){
 
   console.log("Submit button clicked");
@@ -118,21 +116,23 @@ $("#submit-tain").on("click", function(event){
         event.preventDefault();
 
         const name = $("#train-input").val().trim();
-        const role = $("#destination-input").val().trim();
-        const date = $("#frequency-input").val().trim();
-        const  rate =$("#next-input").val().trim();
-        const  rate =$("#minutes-input").val().trim();
+        const Destination = $("#destination-input").val().trim();
+        const Frequency = $("#frequency-input").val().trim();
+        const  next =$("#next-input").val().trim();
+        const  minutes =$("#minutes-input").val().trim();
 
 
-database.ref().push(
-{
-train, 
-destination,
-frequency,
-next,
-minutes,
-dateAdded:firebase.database.serverValue.TIMESTAMP
-});
+
+        const newtrain = {
+    train,
+    destination,
+    frequency,
+    next,
+    minutes
+  };
+
+database.ref().push(newtrain)
+
 $('input').each(function() {
         $(this).val('');
       });
@@ -140,42 +140,29 @@ $('input').each(function() {
       $('textarea').val('');
 
     });
-database.ref().on("child_added", function(snapshot) {
+    database.ref().on("child_added", function(childSnapshot) {
+  console.log(childSnapshot.val());
+
+  // Store everything into a variable.
+  const train = childSnapshot.val().name;
+  const destination = childSnapshot.val().role;
+  const frequency = childSnapshot.val().start;
+  const next = childSnapshot.val().rate;
+  const minutes= childSnapshot.val().rate;
 
         console.log(train);
         console.log(destination);
         console.log(frequency);
         console.log(next);
         console.log(minutes);
-        database.ref().set({
-          train
-          
-        });
-        database.ref().set({
-          destination
-          
-        });
-        database.ref().set({
-          frequency
-          
-        });
-        database.ref().set({
-          next
-        
-        });
-        database.ref().set({
-          minutes
-          
-        });
-      });
-
+    });
 </script>
 
     
     
       
     
-  
+
     </body>
 </html>
-  
+    
