@@ -133,29 +133,43 @@ $("#submit-tain").on("click", function(event){
 
 database.ref().push(newtrain)
 
-$('input').each(function() {
-        $(this).val('');
-      });
-
-      $('textarea').val('');
 
     });
     database.ref().on("child_added", function(childSnapshot) {
   console.log(childSnapshot.val());
 
   // Store everything into a variable.
-  const train = childSnapshot.val().name;
-  const destination = childSnapshot.val().role;
-  const frequency = childSnapshot.val().start;
-  const next = childSnapshot.val().rate;
-  const minutes= childSnapshot.val().rate;
+  const train = childSnapshot.val().train;
+  const destination = childSnapshot.val().destination;
+  const frequency = childSnapshot.val().frequency;
+  const next = childSnapshot.val().next;
+  const minutes= childSnapshot.val().minutes;
 
         console.log(train);
         console.log(destination);
         console.log(frequency);
         console.log(next);
         console.log(minutes);
-    });
+
+
+        const newRow = $("<tr>").append(
+    $("<td>").text(train),
+    $("<td>").text(destination),
+    $("<td>").text(frequency),
+    $("<td>").text(next),
+    $("<td>").text(minutes),
+ 
+  );
+  $("#train-table > tbody").append(newRow);
+});
+
+
+
+
+
+
+
+    
 </script>
 
     
